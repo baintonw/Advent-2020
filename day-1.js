@@ -40,9 +40,46 @@ const addsTo2020 = (arr) => {
 
     console.log(matched[0] * matched[1])
 
-    
-   
-   
 }
 
-addsTo2020(inputArray)
+//Find three numbers in the orignal array that add to 2020, and return their product
+const add3To2020 = (arr) => {
+    const numbersArr = [];
+    let current;
+    let complement;
+
+    let result = []
+
+    //convert strings in array to numbers
+    for (let i = 0; i < arr.length; i++) {
+        const first = parseInt(arr[i])
+        numbersArr.push(first)
+    }
+
+    //is there an item in the numbers array that is less than the item's complement?
+
+    for (let i = 0; i < numbersArr.length; i++) {
+        current = numbersArr[i]
+        complement = 2020 - current
+
+        for (let j = 1; j < numbersArr.length; j++) {
+            if (numbersArr[j] < complement) {
+                // console.log(numbersArr[j])
+                const combo = current + numbersArr[j]
+
+                for (let z = 2; z < numbersArr.length; z++) {
+                    if ((combo + numbersArr[z]) === 2020) {
+
+                        result.includes(numbersArr[z]) ? null : result.push(numbersArr[z])
+                    }
+                }
+            }
+        }        
+    }
+   
+    console.log(result[0] * result[1] * result[2])
+
+}
+
+// addsTo2020(inputArray)
+add3To2020(inputArray)
