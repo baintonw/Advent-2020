@@ -25,7 +25,7 @@ function checkAllPaswords(arr) {
         char = char.replace(':','')
         let password = arr[i][3]
         console.log(min, max, char, password)
-        // console.log(char.replace(':',''))
+        console.log(char.replace(':',''))
         if (hasAtLeast(min, char, password) && hasAtMost(max, char, password)) {
             console.log('VALID')
             console.log(min, max, char, password)
@@ -36,8 +36,59 @@ function checkAllPaswords(arr) {
             console.log(min, max, char, password)
 
         }
+        
     }
     console.log(validPasswords)
+}
+//Only one position
+function checkPosition(first, second, char, password) {
+    let i = 0
+    let position1 = first - 1
+    let position2 = second - 1
+
+    let match1 = false
+    let match2 = false
+
+    while (i < password.length) {
+        if (char === password[i] && i === position1) {
+            match1 = true
+        }
+        if (char === password[i] && i === position2) {
+            match2 = true
+        }
+        i++
+    }
+
+    if (match1 && !match2) {
+        console.log('TRUE')
+        return true
+    }
+    if (match2 && !match1) {
+        console.log('true')
+        return true
+    }
+    console.log('FALSE')
+    return false
+        
+}
+
+function checkPasswordsPos(arr) {
+    let validPasswords = 0;
+    for (let i = 0; i < arr.length; i++) {
+        let line = arr[i]
+        let min = arr[i][0]
+        let max = arr[i][1]
+        let char = arr[i][2]
+        char = char.replace(':','')
+        let password = arr[i][3]
+        if(checkPosition(min, max, char, password)) {
+            validPasswords++
+        }
+        console.log(line)
+    }
+
+    console.log(validPasswords)
+
 }
 
 function hasAtLeast(amount, char, string) {
@@ -84,4 +135,6 @@ splitArr1.forEach(el => cleanedArr.push([el[0], ...el[1].split(' ')]))
 
 // console.log(cleanedArr)
 // checkAllPaswords(cleanedArr)
-checkAllPaswords(cleanedArr)
+// checkAllPaswords(cleanedArr)
+// checkPosition(2,9,'c','ccccccccc')
+checkPasswordsPos(cleanedArr)
