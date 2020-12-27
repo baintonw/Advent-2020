@@ -2,10 +2,12 @@
 const fs = require('fs')
 
 //functions
+//create min and madx elements for each line of data
 function createMinMax(string) {
     string.split('-').forEach(char => numbers.push(parseInt(char)))
 }
 
+//split each line in data array for a second time --> [min, max, char, password]
 function splitSecond(arr) {
     let i = 0;
     while(i < arr.length) {
@@ -15,6 +17,7 @@ function splitSecond(arr) {
     }
 }
 
+//check all passwords to see if they have at least the passed in min, max of a specific char in given password
 function checkAllPaswords(arr) {
     let validPasswords = 0;
     for(let i = 0; i < arr.length; i++) {
@@ -40,7 +43,8 @@ function checkAllPaswords(arr) {
     }
     console.log(validPasswords)
 }
-//Only one position
+
+//Check second criteria for passwords - does the given character appear at only one of the (1 indexed) locations for each password?
 function checkPosition(first, second, char, password) {
     let i = 0
     let position1 = first - 1
@@ -72,6 +76,7 @@ function checkPosition(first, second, char, password) {
         
 }
 
+//Check all passwords based on second criteria
 function checkPasswordsPos(arr) {
     let validPasswords = 0;
     for (let i = 0; i < arr.length; i++) {
@@ -90,7 +95,7 @@ function checkPasswordsPos(arr) {
     console.log(validPasswords)
 
 }
-
+//string as at least amount of x char
 function hasAtLeast(amount, char, string) {
     let count = 0
     for (let i = 0; i < string.length; i++) {
@@ -103,7 +108,7 @@ function hasAtLeast(amount, char, string) {
     }
     return false
 }
-
+//string has at most amount of y char
 function hasAtMost(amount, char,  string) {
     let count = 0
     for (let i = 0; i < string.length; i++) {
@@ -133,8 +138,7 @@ const cleanedArr = []
 
 splitArr1.forEach(el => cleanedArr.push([el[0], ...el[1].split(' ')]))
 
-// console.log(cleanedArr)
+//Solution 1
 // checkAllPaswords(cleanedArr)
-// checkAllPaswords(cleanedArr)
-// checkPosition(2,9,'c','ccccccccc')
+//Solution 2
 checkPasswordsPos(cleanedArr)
